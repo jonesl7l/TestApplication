@@ -1,0 +1,10 @@
+com/jonesl7l/testapplication/BuildConfig.java
+ com.jonesl7l.testapplication.BuildConfig
+com/jonesl7l/testapplication/databinding/FragmentBaseBinding.java
+ com.jonesl7l.testapplication.databinding.FragmentBaseBinding
+com/jonesl7l/testapplication/databinding/ItemButtonViewholderBinding.java
+ com.jonesl7l.testapplication.databinding.ItemButtonViewholderBinding
+com/jonesl7l/testapplication/databinding/ActivityMainBinding.java
+ com.jonesl7l.testapplication.databinding.ActivityMainBinding
+com/jonesl7l/testapplication/databinding/ItemNicBinding.java
+ com.jonesl7l.testapplication.databinding.ItemNicBinding

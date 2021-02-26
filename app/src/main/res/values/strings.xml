@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TestApplication</string>
+
+    <!--    coroutines   -->
     <string name="coroutines">Coroutines</string>
+    <string name="suspended_network">Suspended Network Call</string>
+    <string name="long_running_task">Long running task</string>
 </resources>

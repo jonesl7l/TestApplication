@@ -1,0 +1,6 @@
+﻿.gradle
+app/build/intermediates
+app/build/kotlin/compileDebugKotlin/caches-jvm
+app/build/kotlin/compileDebugKotlin
+app/build/outputs
+.idea
