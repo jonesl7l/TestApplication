@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 object CoroutinesHelper {
 
     val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
+    val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
     val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
 }

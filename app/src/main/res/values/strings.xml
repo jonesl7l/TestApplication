@@ -5,4 +5,8 @@
     <string name="coroutines">Coroutines</string>
     <string name="suspended_network">Suspended Network Call</string>
     <string name="long_running_task">Long running task</string>
+
+    <string name="nic_name_replacement">Name: {NAME}</string>
+    <string name="nic_power_replacement">Power level: {POWER}</string>
+    <string name="nic_image_att">Nic cage placeholder image</string>
 </resources>

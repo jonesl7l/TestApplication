@@ -18,7 +18,6 @@ object NetworkCallHelper {
     fun fetchImageWithPicasso(imageView: ImageView, url: String) {
         Picasso.get()
             .load(url)
-            .centerInside()
             .into(imageView)
     }
 }

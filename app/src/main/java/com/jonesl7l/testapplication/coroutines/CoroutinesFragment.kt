@@ -70,14 +70,15 @@ class CoroutinesFragment : Fragment(), AdapterItemInterface {
 
     private fun suspendedFetchNics() {
         //Get a Retrofit builder instance
-        val service = NetworkCallHelper.getDataRetrofitService("http://localhost:3000/getNics/", NicService::class.java)
+        val service = NetworkCallHelper.getDataRetrofitService("http://192.168.1.88:3000/getNics/", NicService::class.java)
         //Do the initial call on the IO thread; network calls should be handled here
         //apparently Retrofit is thread safe but https://medium.com/android-news/kotlin-coroutines-and-retrofit-e0702d0b8e8f says do it this way
         CoroutineScope(CoroutinesHelper.ioDispatcher).launch {
             // LoadNics is a 'suspend' method
             val response = service.loadNics()
-            //Once we have a response update the UI on the default thread
-            withContext(CoroutinesHelper.defaultDispatcher) {
+            //Once we have a response update the UI on the main thread
+            //If we used default or io here the UI wouldn't until further user interaction
+            withContext(CoroutinesHelper.mainDispatcher) {
                 try {
                     if (response.isSuccessful) {
                         response.body()?.let { displayNics(it) }
