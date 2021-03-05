@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContr
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter.setData(listOf(GenericItem(getString(R.string.coroutines), tag = MainPresenter.COROUTINES_TAG, type = GenericAdapter.GenericItemType.BUTTON)))
+        presenter.setData(listOf(GenericItem(getString(R.string.coroutines_wee_room_wee_retro), tag = MainPresenter.COROUTINES_TAG, type = GenericAdapter.GenericItemType.BUTTON)))
         binding.mainRecycler.adapter = presenter.dataAdapter
     }
 

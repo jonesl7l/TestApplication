@@ -26,17 +26,15 @@ class NicAdapter(private val  listItems: MutableList<Nic>) : RecyclerView.Adapte
     fun updateDataSet(newNics: List<Nic>) {
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
 
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return newNics[newItemPosition].name == listItems[oldItemPosition].name
-                        && newNics[newItemPosition].nicLevel == listItems[oldItemPosition].nicLevel
-                        && newNics[newItemPosition].image == listItems[oldItemPosition].image
-            }
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = newNics[newItemPosition] == listItems[oldItemPosition]
 
             override fun getOldListSize(): Int = listItems.size
 
             override fun getNewListSize(): Int = newNics.size
 
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = newNics[newItemPosition] == listItems[oldItemPosition]
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = newNics[newItemPosition].name == listItems[oldItemPosition].name
+                    && newNics[newItemPosition].nicLevel == listItems[oldItemPosition].nicLevel
+                    && newNics[newItemPosition].image == listItems[oldItemPosition].image
         })
 
         diffResult.dispatchUpdatesTo(this)

@@ -2,8 +2,12 @@
     <string name="app_name">TestApplication</string>
 
     <!--    coroutines   -->
-    <string name="coroutines">Coroutines</string>
+    <string name="coroutines_wee_room_wee_retro">Coroutines with a bit of Room and Retrofit</string>
     <string name="suspended_network">Suspended Network Call</string>
+    <string name="suspended_database_insert">Suspended Database Insert Random Nic</string>
+    <string name="suspended_database_get_all">Suspended Database GetAll Nics</string>
+    <string name="suspended_database_delete">Suspended Database Delete Nic</string>
+    <string name="suspended_database_delete_all">Suspended Database Delete All Nic</string>
     <string name="long_running_task">Long running task</string>
 
     <string name="nic_name_replacement">Name: {NAME}</string>
