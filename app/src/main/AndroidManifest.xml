@@ -14,13 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.MainActivity">
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.MVPMainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.MVVMMainActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

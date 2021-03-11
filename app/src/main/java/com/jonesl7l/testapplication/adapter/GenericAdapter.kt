@@ -18,7 +18,7 @@ class GenericAdapter(private val listItems: List<GenericItem>, private val callb
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
-            GenericItemType.BUTTON.getValue() -> ButtonViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_button_viewholder, parent, false))
+            GenericItemType.BUTTON.getValue() -> ButtonViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_button, parent, false))
             else -> {
                 throw IllegalStateException("Illegal view type")
             }

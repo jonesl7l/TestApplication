@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface NicService {
 
     @GET("/getNics")
-    suspend fun loadNics(): Response<Nics>
+    suspend fun suspendedLoadNics(): Response<Nics>
 }

@@ -1,23 +1,13 @@
 package com.jonesl7l.testapplication.coroutines
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
-import com.jonesl7l.testapplication.R
 import com.jonesl7l.testapplication.adapter.AdapterItemInterface
-import com.jonesl7l.testapplication.adapter.GenericAdapter
-import com.jonesl7l.testapplication.adapter.NicAdapter
-import com.jonesl7l.testapplication.databinding.FragmentBaseBinding
+import com.jonesl7l.testapplication.genericnics.NicFragment
 import com.jonesl7l.testapplication.helpers.CoroutinesHelper
 import com.jonesl7l.testapplication.helpers.NetworkCallHelper
 import com.jonesl7l.testapplication.retrofit.NicService
 import com.jonesl7l.testapplication.room.AppDatabaseHelper
 import com.jonesl7l.testapplication.room.NicRow
-import com.jonesl7l.testapplication.viewmodels.GenericItem
 import com.jonesl7l.testapplication.viewmodels.Nic
 import com.jonesl7l.testapplication.viewmodels.Nics
 import kotlinx.coroutines.CoroutineScope
@@ -25,36 +15,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.lang.Exception
 import kotlin.random.Random
 
-class CoroutinesFragment : Fragment(), AdapterItemInterface {
-
-    private var fragmentBinding: FragmentBaseBinding? = null
-
-    private var genericAdapter: GenericAdapter? = null
-
-    private var nicAdapter: NicAdapter? = null
-    private var nicsInstance: Nics = Nics(mutableListOf())
-
-    //region Fragment
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        fragmentBinding = FragmentBaseBinding.inflate(layoutInflater, container, false)
-        return fragmentBinding?.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setAdapter()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        fragmentBinding = null
-    }
-
-    //endregion
+class CoroutinesFragment : NicFragment(), AdapterItemInterface {
 
     //region AdapterItemInterface
 
@@ -68,19 +31,7 @@ class CoroutinesFragment : Fragment(), AdapterItemInterface {
 
     //endregion
 
-    //init
-
-    private fun setAdapter() {
-        genericAdapter = GenericAdapter(listOf(GenericItem(getString(R.string.suspended_network), tag = RETROFIT_GET_TAG, type = GenericAdapter.GenericItemType.BUTTON),
-            GenericItem(getString(R.string.suspended_database_insert), tag = ROOM_INSERT_RANDOM_TAG, type = GenericAdapter.GenericItemType.BUTTON),
-            GenericItem(getString(R.string.suspended_database_delete_all), tag = ROOM_DELETE_ALL_NICS_TAG, type = GenericAdapter.GenericItemType.BUTTON)), this)
-        nicAdapter = NicAdapter(nicsInstance.nics)
-
-        fragmentBinding?.fragmentBaseButtonRecycler?.adapter = genericAdapter
-        fragmentBinding?.fragmentBaseDataRecycler?.adapter = nicAdapter
-    }
-
-    //endregion
+    //region Coroutines
 
     /**
      * CoroutineScope It is defined a simple factory function that takes CoroutineContexts as arguments to create wrapper
@@ -92,9 +43,9 @@ class CoroutinesFragment : Fragment(), AdapterItemInterface {
         //Do the initial call on the IO thread; network calls should be handled here
         //apparently Retrofit is thread safe but https://medium.com/android-news/kotlin-coroutines-and-retrofit-e0702d0b8e8f says do it this way
         CoroutineScope(CoroutinesHelper.ioDispatcher).launch {
-            // LoadNics is a 'suspend' method
+            // LoadNics is a 'suspended' method
             // We have to wrap any suspended functions inside a coroutine(CoroutineScope in this case) or another suspended function
-            val response = service.loadNics()
+            val response = service.suspendedLoadNics()
             //Once we have a response update the UI on the main thread
             //If we used default or io here the UI wouldn't until further user interaction
             withContext(CoroutinesHelper.mainDispatcher) {
@@ -139,8 +90,8 @@ class CoroutinesFragment : Fragment(), AdapterItemInterface {
     }
 
     /**
-     * LifecycleScope is an extention for LifeCycleOwner and bound to Actvity or Fragment's lifCycle where scope is canceled when that Activity or Fragment is destroyed.
-     * This has specfic methods for launching on onStart, onResume
+     * LifecycleScope is an extension for LifeCycleOwner and bound to Activity or Fragment's lifCycle where scope is canceled when that Activity or Fragment is destroyed.
+     * This has specific methods for launching on onStart, onResume
      */
     private fun suspendedCoroutineDeleteAllNics() {
         //This would be cancelled if the activity/fragment was destroyed
@@ -152,18 +103,9 @@ class CoroutinesFragment : Fragment(), AdapterItemInterface {
         }
     }
 
-    private fun displayNics(nics: Nics) {
-        nicAdapter?.updateDataSet(nics.nics)
-    }
+    //endregion
 
     companion object {
-
-        const val RETROFIT_GET_TAG = "retro get"
-        const val ROOM_INSERT_RANDOM_TAG = "room insert random"
-        const val ROOM_DELETE_NIC_TAG = "room delete nic"
-        const val ROOM_DELETE_ALL_NICS_TAG = "room delete all nics"
-        const val AWAIT_TAG = "await"
-        const val DISPATCHER_TAG = "dispatcher"
 
         fun instance(): CoroutinesFragment = CoroutinesFragment()
     }

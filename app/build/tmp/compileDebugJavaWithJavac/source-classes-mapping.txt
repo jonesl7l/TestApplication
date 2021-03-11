@@ -2,8 +2,6 @@ com/jonesl7l/testapplication/BuildConfig.java
  com.jonesl7l.testapplication.BuildConfig
 com/jonesl7l/testapplication/databinding/FragmentBaseBinding.java
  com.jonesl7l.testapplication.databinding.FragmentBaseBinding
-com/jonesl7l/testapplication/databinding/ItemButtonViewholderBinding.java
- com.jonesl7l.testapplication.databinding.ItemButtonViewholderBinding
 com/jonesl7l/testapplication/room/NicDao_Impl.java
  com.jonesl7l.testapplication.room.NicDao_Impl
  com.jonesl7l.testapplication.room.NicDao_Impl$1
@@ -16,6 +14,10 @@ com/jonesl7l/testapplication/room/NicDao_Impl.java
 com/jonesl7l/testapplication/room/AppDatabase_Impl.java
  com.jonesl7l.testapplication.room.AppDatabase_Impl
  com.jonesl7l.testapplication.room.AppDatabase_Impl$1
+com/jonesl7l/testapplication/databinding/ActivitySplashBinding.java
+ com.jonesl7l.testapplication.databinding.ActivitySplashBinding
+com/jonesl7l/testapplication/databinding/ItemButtonBinding.java
+ com.jonesl7l.testapplication.databinding.ItemButtonBinding
 com/jonesl7l/testapplication/databinding/ActivityMainBinding.java
  com.jonesl7l.testapplication.databinding.ActivityMainBinding
 com/jonesl7l/testapplication/databinding/ItemNicBinding.java
